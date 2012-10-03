@@ -1,0 +1,56 @@
+ABOUT:
+This document refers to the C source code 'adhoc.c'. 
+@date: Aug 15,2012
+@author: Ayon Chakraborty
+
+NOTES:
+This is a skeleton application meant for exchanging data in between nodes in an 
+adhoc network and logging them into files. The following steps describes how to 
+run the code, with necessary prerequisites.
+
+1. First of all, you need a Linux machine equipped with a wireless interface. In the 
+    console, type "iwlist" and check whether the command is supported. If not, install
+    wireless-tools in your machine by, "sudo apt-get install wireless-tools" and proceed.
+    After you are done, recheck "iwlist" command. The other handy tools available in the
+    wireless-tools package are at, http://en.wikipedia.org/wiki/Wireless_tools_for_Linux
+     "$> iwlist interface scanning" will scan the network interface and give you the list
+   of available access points that can be sensed. This along with the signal strength 
+   information gives you the approximate location of your node (laptop).
+
+2. Now we will set up the ad-hoc network.
+    a) Go to Network Connections -> Edit connections -> Wireless
+    b) 'Add' a connection 
+              Connection Name and SSID: CSE570_XX (where XX will be determined by your adhoc network group)
+              Mode: Ad-hoc (leave the rest)
+              Wireless security: None
+              IPv4 Settings: Shared to other computers
+              Ignore IPv6 settings 
+    c) Having set up the ad-hoc network, try to connect to it. Go to the Network connections
+        and connect to the network CSE570_XX. If you cannot see it in the list, see
+        'connect to hidden wireless networks'. Make sure you successfully connect to it.
+         Now, test it on your peer's machine. Once you set up the network CSE570_XX, you
+        should be able to view that ad-hoc network from your peer's machine. Connect to it.
+   d) Check your network addresses. Do a ifconfig, and check out your own ip and the 
+        broadcast address. Broadcast address means if anybody *who is connected to the
+        network CSE570_XX* sends out a packet to the bcast ip, every node in that network
+        hears it. You require the bcast address for this application.
+
+3. Now we have the system ready. Set up a network and run the application.
+
+    [A]-----------[B]---------------------------------[C]
+                   |
+                   |
+                  [D]-----------------[E]
+
+    The above shows a sample instance of the ad-hoc network you would be running.
+    Suppose B sets up the network and the others connect to it. For all nodes,A,B,C,D,E
+    the broadcast address would be the same. 
+    Compile and run the source code provided to you. 
+    If your wireless interface is known as wlan, you should run the code like the following,
+    :\> ./a.out  10.42.43.255 wlan
+  
+   Three files would be created in the local directory in the local directory from where you are
+   running the application. Check out the source code for more details.
+
+
+
